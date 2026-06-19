@@ -1,0 +1,34 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Xcode user-local state
+**/xcuserdata/
+**/*.xcuserstate
+**/DerivedData/
+
+# Swift / SwiftPM build output
+**/.build/
+**/.swiftpm/
+
+# Frontend local tooling artifacts
+frontend/tools/xcodegen.zip
+frontend/tools/xcodegen/
+
+# Python backend local state
+backend/.venv/
+backend/venv/
+backend/__pycache__/
+backend/**/*.py[cod]
+backend/.pytest_cache/
+backend/.mypy_cache/
+backend/.ruff_cache/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log

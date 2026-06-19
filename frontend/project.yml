@@ -1,0 +1,68 @@
+name: DengKiller
+options:
+  bundleIdPrefix: com.dengkiller
+  deploymentTarget:
+    iOS: "18.0"
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+    MARKETING_VERSION: "0.1.0"
+    CURRENT_PROJECT_VERSION: "1"
+targets:
+  DengKillerCore:
+    type: framework
+    platform: iOS
+    sources:
+      - path: DengKillerCore/Sources
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.dengkiller.core
+        GENERATE_INFOPLIST_FILE: YES
+  DengKillerApp:
+    type: application
+    platform: iOS
+    sources:
+      - path: DengKillerApp/Sources
+    dependencies:
+      - target: DengKillerCore
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.dengkiller.app
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_CFBundleDisplayName: DengKiller
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_UIRequiresFullScreen: YES
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+  DengKillerTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: DengKillerTests
+    dependencies:
+      - target: DengKillerCore
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.dengkiller.tests
+        GENERATE_INFOPLIST_FILE: YES
+  DengKillerUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - path: DengKillerUITests
+    dependencies:
+      - target: DengKillerApp
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.dengkiller.uitests
+        GENERATE_INFOPLIST_FILE: YES
+schemes:
+  DengKillerApp:
+    build:
+      targets:
+        DengKillerApp: all
+        DengKillerTests: [test]
+        DengKillerUITests: [test]
+    test:
+      targets:
+        - name: DengKillerTests
+        - name: DengKillerUITests
