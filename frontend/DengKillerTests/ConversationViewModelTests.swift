@@ -41,6 +41,8 @@ final class ConversationViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.claims[0].status, .ignored)
         XCTAssertEqual(viewModel.claims[1].status, .reviewLater)
         XCTAssertEqual(viewModel.claims[2].status, .possiblyFalse)
+        XCTAssertFalse(viewModel.visibleClaims.contains { $0.status == .ignored })
+        XCTAssertEqual(viewModel.visibleClaims.count, 2)
         XCTAssertEqual(viewModel.claims[0].checkworthyScore, 0.2, accuracy: 0.001)
         XCTAssertEqual(viewModel.claims[1].checkworthyScore, 0.63, accuracy: 0.001)
         XCTAssertEqual(viewModel.claims[2].checkworthyScore, 0.88, accuracy: 0.001)
@@ -94,4 +96,3 @@ final class ConversationViewModelTests: XCTestCase {
         XCTAssertFalse(requests.first?.claim.contains("私人内容") ?? true)
     }
 }
-

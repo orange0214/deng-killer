@@ -19,10 +19,9 @@ struct ContentView: View {
                 .accessibilityIdentifier("reviewButton")
             }
             .safeAreaInset(edge: .bottom) {
-                if let highlightedResult {
+                if possibleFalseCount > 0 {
                     AlertSummaryView(
-                        count: possibleFalseCount,
-                        suggestedResponse: highlightedResult.suggestedResponse
+                        count: possibleFalseCount
                     )
                 }
             }
@@ -73,12 +72,6 @@ struct ContentView: View {
         }
     }
 
-    private var highlightedResult: VerificationResult? {
-        viewModel.claims
-            .compactMap(\.result)
-            .first { $0.verdict == .possiblyFalse }
-    }
-
     private var possibleFalseCount: Int {
         viewModel.claims.filter { $0.status == .possiblyFalse }.count
     }
@@ -104,13 +97,13 @@ struct ContentView: View {
 
     private var claimSection: some View {
         Section("事实主张") {
-            if viewModel.claims.isEmpty {
+            if viewModel.visibleClaims.isEmpty {
                 Text("等待完整句子后再判断是否值得核验。")
                     .foregroundStyle(.secondary)
                     .accessibilityIdentifier("emptyClaims")
             }
 
-            ForEach(viewModel.claims) { claim in
+            ForEach(viewModel.visibleClaims) { claim in
                 ClaimCard(claim: claim)
             }
         }
@@ -120,7 +113,6 @@ struct ContentView: View {
 
 private struct AlertSummaryView: View {
     let count: Int
-    let suggestedResponse: String
 
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
@@ -129,12 +121,6 @@ private struct AlertSummaryView: View {
                 .fontWeight(.semibold)
                 .foregroundStyle(.red)
                 .accessibilityIdentifier("possibleFalseSummary")
-
-            Text("建议回应：\(suggestedResponse)")
-                .font(.footnote)
-                .foregroundStyle(.secondary)
-                .lineLimit(2)
-                .accessibilityIdentifier("latestSuggestionSummary")
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(12)
@@ -215,9 +201,6 @@ private struct ClaimCard: View {
                             .font(.footnote)
                             .foregroundStyle(.secondary)
                     }
-                    Text("建议回应：\(result.suggestedResponse)")
-                        .font(.footnote)
-                        .fontWeight(.medium)
                 }
                 .accessibilityIdentifier("resultCard-\(claim.status.rawValue)")
             }

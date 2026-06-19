@@ -35,8 +35,7 @@ public actor MockVerificationClient: VerificationClient {
                     "FastAPI 基于 Starlette，并支持 ASGI。",
                     "FastAPI 支持 async/await 异步请求处理。",
                     "多线程更多与部署服务器或运行环境有关，不是 FastAPI 的核心设计原因。"
-                ],
-                suggestedResponse: "你说的多线程是指部署方式，还是 FastAPI 框架本身？我理解 FastAPI 的优势主要是 ASGI 和异步 I/O。"
+                ]
             )
         }
 
@@ -50,8 +49,7 @@ public actor MockVerificationClient: VerificationClient {
                 evidenceSummary: [
                     "Redis 的核心数据模型是键值与多种数据结构。",
                     "关系型数据库通常以表、行、列和关系约束组织数据。"
-                ],
-                suggestedResponse: "你这里说的关系型，是指它能存结构化数据，还是指传统表关系模型？"
+                ]
             )
         }
 
@@ -65,8 +63,7 @@ public actor MockVerificationClient: VerificationClient {
                 evidenceSummary: [
                     "美国总统任期按四年一届计算。",
                     "任期限制来自美国宪法第二十二修正案。"
-                ],
-                suggestedResponse: "我印象里美国总统是一届 4 年，我们要不要确认一下这个数字？"
+                ]
             )
         }
 
@@ -80,8 +77,7 @@ public actor MockVerificationClient: VerificationClient {
                 evidenceSummary: [
                     "时间和主体不完整会导致无法定位可靠财报来源。",
                     "利润增长可能指净利润、经营利润或调整后利润。"
-                ],
-                suggestedResponse: "这里说的是哪家公司、哪一年的利润？看财报口径会更准确。"
+                ]
             )
         }
 
@@ -93,9 +89,7 @@ public actor MockVerificationClient: VerificationClient {
             correction: "需要更多主体、时间或数据来源。",
             evidenceSummary: [
                 "该主张缺少足够的可验证细节。"
-            ],
-            suggestedResponse: "这个说法可能需要看具体场景，你指的是哪个时间或来源？"
+            ]
         )
     }
 }
-

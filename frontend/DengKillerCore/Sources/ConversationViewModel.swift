@@ -30,6 +30,10 @@ public final class ConversationViewModel: ObservableObject {
         claims.filter { $0.status != .ignored && $0.status != .reviewLater }
     }
 
+    public var visibleClaims: [ClaimAssessment] {
+        claims.filter { $0.status != .ignored }
+    }
+
     public var reviewClaims: [ClaimAssessment] {
         claims.filter { $0.status == .reviewLater || $0.status == .uncertain || $0.status == .needsContext }
     }
@@ -161,4 +165,3 @@ public final class ConversationViewModel: ObservableObject {
         TranscriptSentence(speaker: "B", startTime: "00:00:19", endTime: "00:00:22", text: "美国总统任期是 5 年。", isFinal: true)
     ]
 }
-

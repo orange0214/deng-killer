@@ -115,7 +115,6 @@ public struct VerificationResult: Equatable, Sendable {
     public let issue: String
     public let correction: String
     public let evidenceSummary: [String]
-    public let suggestedResponse: String
 
     public init(
         originalClaim: String,
@@ -123,8 +122,7 @@ public struct VerificationResult: Equatable, Sendable {
         confidence: Double,
         issue: String,
         correction: String,
-        evidenceSummary: [String],
-        suggestedResponse: String
+        evidenceSummary: [String]
     ) {
         self.originalClaim = originalClaim
         self.verdict = verdict
@@ -132,7 +130,5 @@ public struct VerificationResult: Equatable, Sendable {
         self.issue = issue
         self.correction = correction
         self.evidenceSummary = evidenceSummary
-        self.suggestedResponse = suggestedResponse
     }
 }
-

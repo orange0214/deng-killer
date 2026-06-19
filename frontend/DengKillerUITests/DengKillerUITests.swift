@@ -16,7 +16,8 @@ final class DengKillerUITests: XCTestCase {
 
         XCTAssertTrue(app.staticTexts["FastAPI 比 Django 快是因为 FastAPI 是多线程。"].waitForExistence(timeout: 5))
         XCTAssertTrue(waitForAny(app, identifiers: ["alertSummaryCard", "发现 3 条可能错误"], timeout: 10))
-        XCTAssertTrue(waitForAny(app, identifiers: ["建议回应：你说的多线程是指部署方式，还是 FastAPI 框架本身？我理解 FastAPI 的优势主要是 ASGI 和异步 I/O。"], timeout: 10))
+        XCTAssertFalse(app.staticTexts["已忽略"].exists)
+        XCTAssertFalse(app.staticTexts["claimStatus-ignored"].exists)
 
         app.buttons["reviewButton"].tap()
 

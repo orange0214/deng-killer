@@ -19,7 +19,7 @@ struct ReviewView: View {
                         .font(.footnote)
                         .foregroundStyle(.secondary)
                     if let result = claim.result {
-                        Text(result.suggestedResponse)
+                        Text(result.correction)
                             .font(.subheadline)
                     }
                 }
@@ -30,4 +30,3 @@ struct ReviewView: View {
         .accessibilityIdentifier("reviewScreen")
     }
 }
-
