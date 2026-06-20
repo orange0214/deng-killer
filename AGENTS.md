@@ -102,6 +102,13 @@ cd frontend
 xcodebuild test -project DengKiller.xcodeproj -scheme DengKillerApp -destination 'platform=iOS Simulator,name=iPhone 17,OS=26.5' -derivedDataPath .build/DerivedData CODE_SIGNING_ALLOWED=NO
 ```
 
+## 提交与 GitHub 规范
+
+- 每次提交并推送到 GitHub 前，都必须撰写完整且详细的 commit message。
+- commit message 应清楚说明本次变更的目的、主要改动、验证方式，以及任何未验证或已知风险。
+- 避免使用过于笼统的提交信息，例如 `update`、`fix`、`misc` 或 `changes`。
+- 如果本次变更涉及隐私边界、用户可见行为、接口契约或测试策略，commit message 必须明确点出这些影响。
+
 ## 提交前检查
 
 - 变更是否符合 `PRD.md` 的 MVP 范围。
