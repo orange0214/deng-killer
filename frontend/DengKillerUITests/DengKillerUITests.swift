@@ -40,6 +40,22 @@ final class DengKillerUITests: XCTestCase {
     }
 
     @MainActor
+    func testRecordingCanBeStoppedWhileTranscriptionIsStillRunning() throws {
+        let app = XCUIApplication()
+        app.launchArguments = ["-useLongRunningMockTranscription"]
+        app.launch()
+
+        XCTAssertTrue(app.navigationBars["对话事实护盾"].waitForExistence(timeout: 5))
+
+        app.buttons["recordingButton"].tap()
+        XCTAssertTrue(app.buttons["结束记录"].waitForExistence(timeout: 5))
+
+        app.buttons["recordingButton"].tap()
+        XCTAssertTrue(app.buttons["开始记录对话"].waitForExistence(timeout: 5))
+        XCTAssertFalse(app.buttons["结束记录"].exists)
+    }
+
+    @MainActor
     private func waitForAny(_ app: XCUIApplication, identifiers: [String], timeout: TimeInterval) -> Bool {
         let deadline = Date().addingTimeInterval(timeout)
         while Date() < deadline {

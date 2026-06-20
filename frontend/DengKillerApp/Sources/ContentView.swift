@@ -65,7 +65,7 @@ struct ContentView: View {
                             .font(.footnote)
                             .foregroundStyle(.red)
 
-                        Button("重试核验") {
+                        Button(viewModel.claims.contains(where: { $0.status == .failed }) ? "重试核验" : "重新开始记录") {
                             if viewModel.claims.contains(where: { $0.status == .failed }) {
                                 viewModel.retryFailedClaims()
                             } else {

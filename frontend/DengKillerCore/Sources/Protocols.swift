@@ -52,6 +52,8 @@ public final class InMemoryConversationStore: ConversationStore {
 public final class MockAudioTranscriptionService: AudioTranscriptionService {
     private let events: [TranscriptionEvent]
     private let delayNanoseconds: UInt64
+    private var continuation: AsyncStream<TranscriptionEvent>.Continuation?
+    private var task: Task<Void, Never>?
 
     public init(events: [TranscriptionEvent], delayNanoseconds: UInt64 = 0) {
         self.events = events
@@ -63,11 +65,13 @@ public final class MockAudioTranscriptionService: AudioTranscriptionService {
         let delayNanoseconds = delayNanoseconds
 
         return AsyncStream { continuation in
-            Task {
+            self.continuation = continuation
+            self.task = Task {
                 for event in events {
                     if delayNanoseconds > 0 {
                         try? await Task.sleep(nanoseconds: delayNanoseconds)
                     }
+                    guard !Task.isCancelled else { break }
                     continuation.yield(event)
                 }
                 continuation.finish()
@@ -75,5 +79,10 @@ public final class MockAudioTranscriptionService: AudioTranscriptionService {
         }
     }
 
-    public func stopTranscribing() {}
+    public func stopTranscribing() {
+        task?.cancel()
+        task = nil
+        continuation?.finish()
+        continuation = nil
+    }
 }

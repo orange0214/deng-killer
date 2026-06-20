@@ -44,6 +44,15 @@ struct DengKillerApp: App {
             )
         }
 
+        if arguments.contains("-useLongRunningMockTranscription") {
+            return MockAudioTranscriptionService(
+                events: [
+                    .partial("正在记录一段较长的对话")
+                ],
+                delayNanoseconds: 10_000_000_000
+            )
+        }
+
         if arguments.contains("-useMockTranscriptionFailure") {
             return MockAudioTranscriptionService(
                 events: [
