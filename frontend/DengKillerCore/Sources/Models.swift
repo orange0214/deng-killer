@@ -25,6 +25,13 @@ public struct TranscriptSentence: Identifiable, Equatable, Sendable {
     }
 }
 
+public enum TranscriptionEvent: Equatable, Sendable {
+    case partial(String)
+    case final(TranscriptSentence)
+    case permissionDenied(String)
+    case failed(String)
+}
+
 public enum ClaimType: String, Equatable, Sendable {
     case technicalFact = "technical_fact"
     case businessFact = "business_fact"

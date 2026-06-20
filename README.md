@@ -87,13 +87,11 @@ backend architecture and privacy rules.
 
 Frontend work remaining from `PRD.md`:
 
-- Add real audio capture with `AVAudioEngine`, including permission handling,
-  audio segmentation, and basic volume/activity handling.
-- Add ASR with Apple Speech or an on-device Whisper-style model.
-- Keep the current rule that ASR partial transcripts do not trigger claim
-  processing; only finalized sentences should enter the claim pipeline.
-- Replace the demo/mock conversation flow with real recording, transcript, and
-  finalized sentence handling.
+- Polish real audio capture with volume/activity handling and more robust
+  interruption recovery.
+- Evaluate an on-device Whisper-style ASR option after the Apple Speech MVP.
+- Improve sentence finalization beyond punctuation and Apple Speech final
+  signals, especially for long pauses and multi-sentence ASR revisions.
 - Keep full audio, full transcripts, session review, and verification results
   local to the phone by default.
 - Add local deletion controls for single sessions and an optional auto-delete

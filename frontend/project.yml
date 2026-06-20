@@ -25,11 +25,15 @@ targets:
       - path: DengKillerApp/Sources
     dependencies:
       - target: DengKillerCore
+      - sdk: AVFoundation.framework
+      - sdk: Speech.framework
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.dengkiller.app
         GENERATE_INFOPLIST_FILE: YES
         INFOPLIST_KEY_CFBundleDisplayName: DengKiller
+        INFOPLIST_KEY_NSMicrophoneUsageDescription: DengKiller 需要使用麦克风记录对话并在本机生成转写。
+        INFOPLIST_KEY_NSSpeechRecognitionUsageDescription: DengKiller 需要使用语音识别把对话转换为句子级文字。
         INFOPLIST_KEY_UILaunchScreen_Generation: YES
         INFOPLIST_KEY_UIRequiresFullScreen: YES
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon

@@ -4,6 +4,12 @@ public protocol VerificationClient: Sendable {
     func verify(_ request: VerificationRequest) async throws -> VerificationResult
 }
 
+@MainActor
+public protocol AudioTranscriptionService: AnyObject {
+    func startTranscribing() -> AsyncStream<TranscriptionEvent>
+    func stopTranscribing()
+}
+
 public protocol ConversationStore: AnyObject {
     var sentences: [TranscriptSentence] { get }
     var claims: [ClaimAssessment] { get }
@@ -42,3 +48,32 @@ public final class InMemoryConversationStore: ConversationStore {
     }
 }
 
+@MainActor
+public final class MockAudioTranscriptionService: AudioTranscriptionService {
+    private let events: [TranscriptionEvent]
+    private let delayNanoseconds: UInt64
+
+    public init(events: [TranscriptionEvent], delayNanoseconds: UInt64 = 0) {
+        self.events = events
+        self.delayNanoseconds = delayNanoseconds
+    }
+
+    public func startTranscribing() -> AsyncStream<TranscriptionEvent> {
+        let events = events
+        let delayNanoseconds = delayNanoseconds
+
+        return AsyncStream { continuation in
+            Task {
+                for event in events {
+                    if delayNanoseconds > 0 {
+                        try? await Task.sleep(nanoseconds: delayNanoseconds)
+                    }
+                    continuation.yield(event)
+                }
+                continuation.finish()
+            }
+        }
+    }
+
+    public func stopTranscribing() {}
+}

@@ -31,19 +31,25 @@ struct ContentView: View {
     private var controlSection: some View {
         Section {
             VStack(alignment: .leading, spacing: 12) {
-                Text("低打扰记录对话，只把高价值事实主张送入模拟核验。")
+                Text("低打扰记录对话，只把高价值事实主张送入核验。")
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
 
                 HStack {
-                    Button(viewModel.isRecording ? "结束模拟对话" : "开始模拟对话") {
+                    Button(viewModel.isRecording ? "结束记录" : "开始记录对话") {
                         if viewModel.isRecording {
-                            viewModel.stopSimulation()
+                            viewModel.stopRecording()
                         } else {
-                            viewModel.startSimulation()
+                            viewModel.startRecording()
                         }
                     }
                     .buttonStyle(.borderedProminent)
+                    .accessibilityIdentifier("recordingButton")
+
+                    Button("运行模拟对话") {
+                        viewModel.startSimulation()
+                    }
+                    .buttonStyle(.bordered)
                     .accessibilityIdentifier("startSimulationButton")
 
                     Button("重置") {
@@ -60,11 +66,16 @@ struct ContentView: View {
                             .foregroundStyle(.red)
 
                         Button("重试核验") {
-                            viewModel.retryFailedClaims()
+                            if viewModel.claims.contains(where: { $0.status == .failed }) {
+                                viewModel.retryFailedClaims()
+                            } else {
+                                viewModel.startRecording()
+                            }
                         }
                         .buttonStyle(.bordered)
                         .accessibilityIdentifier("retryButton")
                     }
+                    .accessibilityElement(children: .contain)
                     .accessibilityIdentifier("errorBanner")
                 }
             }
@@ -79,7 +90,7 @@ struct ContentView: View {
     private var transcriptSection: some View {
         Section("实时转写") {
             if viewModel.sentences.isEmpty && viewModel.partialTranscript.isEmpty {
-                ContentUnavailableView("还没有对话", systemImage: "waveform", description: Text("点击开始模拟对话，查看句子级转写。"))
+                ContentUnavailableView("还没有对话", systemImage: "waveform", description: Text("点击开始记录对话，查看句子级转写。"))
                     .accessibilityIdentifier("emptyTranscript")
             }
 

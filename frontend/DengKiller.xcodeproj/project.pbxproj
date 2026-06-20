@@ -9,10 +9,13 @@
 /* Begin PBXBuildFile section */
 		0292871FE11C5493BDAA975A /* DengKillerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769ED537131B5CC34BA8240E /* DengKillerApp.swift */; };
 		0D602C24C40B0ACFFEDD5A04 /* ClaimScorer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB35FF63F2FB164487B804A /* ClaimScorer.swift */; };
+		254479090A727630BAF7F3BC /* Speech.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F6A7F8E30A093E26985EA13 /* Speech.framework */; };
 		2AB0409B666BBF6AE43CB95B /* ConversationViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BCEC1CA022E33D6ED7F2480 /* ConversationViewModelTests.swift */; };
+		2B1C50229C5AFE8F23A8EFA6 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E7288795F52F89C9F77D774 /* AVFoundation.framework */; };
 		305EEFF1F7428FEE6F3354FC /* MockVerificationClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A0A775FC3447DAF1FA9FE2 /* MockVerificationClient.swift */; };
 		3CC5D139279E2FBCB5DB2668 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835171767463E2E449B78B9A /* ContentView.swift */; };
 		5AD2A16ED629D47E99E92D2C /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDD50A0719566988963F862 /* Protocols.swift */; };
+		5D7B5CF76EEA065138623834 /* AppleSpeechTranscriptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34093FBE8F2567A4495218E3 /* AppleSpeechTranscriptionService.swift */; };
 		75B2156F8DB8060AD187117D /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448394C0F73D72E3089B7AFD /* ReviewView.swift */; };
 		8C220222BBED25028D7BC628 /* DengKillerCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F2B2041F8486E9EAA0A3F766 /* DengKillerCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		904873CF078FB56B5A9EC1EA /* ConversationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3FA7ABEF07F1500932AB13 /* ConversationViewModel.swift */; };
@@ -21,6 +24,7 @@
 		B877534429277712E7E1FD31 /* DengKillerCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2B2041F8486E9EAA0A3F766 /* DengKillerCore.framework */; };
 		BD6895FBFF242D7680C5896E /* DengKillerCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F2B2041F8486E9EAA0A3F766 /* DengKillerCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C6334057A3F4ED918E990327 /* DengKillerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2F44D7C4980984075D76C4 /* DengKillerUITests.swift */; };
+		F7A7493D04DF35C33B09125E /* SentenceFinalizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38BEB1D9C586C4175A711A7D /* SentenceFinalizer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,9 +78,13 @@
 
 /* Begin PBXFileReference section */
 		11A0A775FC3447DAF1FA9FE2 /* MockVerificationClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockVerificationClient.swift; sourceTree = "<group>"; };
+		34093FBE8F2567A4495218E3 /* AppleSpeechTranscriptionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSpeechTranscriptionService.swift; sourceTree = "<group>"; };
+		38BEB1D9C586C4175A711A7D /* SentenceFinalizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentenceFinalizer.swift; sourceTree = "<group>"; };
 		448394C0F73D72E3089B7AFD /* ReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewView.swift; sourceTree = "<group>"; };
+		4E7288795F52F89C9F77D774 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		5BCEC1CA022E33D6ED7F2480 /* ConversationViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewModelTests.swift; sourceTree = "<group>"; };
 		6DC4E935BF63AC2A0142F0D3 /* DengKillerApp.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = DengKillerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6F6A7F8E30A093E26985EA13 /* Speech.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Speech.framework; path = System/Library/Frameworks/Speech.framework; sourceTree = SDKROOT; };
 		769ED537131B5CC34BA8240E /* DengKillerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DengKillerApp.swift; sourceTree = "<group>"; };
 		7C1130114FCB62A7492857D6 /* DengKillerTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = DengKillerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D3A61E5BE85A37329C0DEF8 /* DengKillerUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = DengKillerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -103,15 +111,27 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA5FA1FD3815ABF87591F2AE /* DengKillerCore.framework in Frameworks */,
+				2B1C50229C5AFE8F23A8EFA6 /* AVFoundation.framework in Frameworks */,
+				254479090A727630BAF7F3BC /* Speech.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		16A88616346A381F0F8607C1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4E7288795F52F89C9F77D774 /* AVFoundation.framework */,
+				6F6A7F8E30A093E26985EA13 /* Speech.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		3347AA772AF47B5265666994 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				34093FBE8F2567A4495218E3 /* AppleSpeechTranscriptionService.swift */,
 				835171767463E2E449B78B9A /* ContentView.swift */,
 				769ED537131B5CC34BA8240E /* DengKillerApp.swift */,
 				448394C0F73D72E3089B7AFD /* ReviewView.swift */,
@@ -154,6 +174,7 @@
 				65866D2B9FE6E2BA9508E609 /* DengKillerUITests */,
 				3347AA772AF47B5265666994 /* Sources */,
 				DB20629C522D37D2D0C46262 /* Sources */,
+				16A88616346A381F0F8607C1 /* Frameworks */,
 				65AA856BC5C2BCE68255025B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -166,6 +187,7 @@
 				11A0A775FC3447DAF1FA9FE2 /* MockVerificationClient.swift */,
 				A186DE218C568A8EF9694345 /* Models.swift */,
 				ACDD50A0719566988963F862 /* Protocols.swift */,
+				38BEB1D9C586C4175A711A7D /* SentenceFinalizer.swift */,
 			);
 			name = Sources;
 			path = DengKillerCore/Sources;
@@ -280,6 +302,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D7B5CF76EEA065138623834 /* AppleSpeechTranscriptionService.swift in Sources */,
 				3CC5D139279E2FBCB5DB2668 /* ContentView.swift in Sources */,
 				0292871FE11C5493BDAA975A /* DengKillerApp.swift in Sources */,
 				75B2156F8DB8060AD187117D /* ReviewView.swift in Sources */,
@@ -311,6 +334,7 @@
 				305EEFF1F7428FEE6F3354FC /* MockVerificationClient.swift in Sources */,
 				9CD199D305222BD65DDA2EB5 /* Models.swift in Sources */,
 				5AD2A16ED629D47E99E92D2C /* Protocols.swift in Sources */,
+				F7A7493D04DF35C33B09125E /* SentenceFinalizer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,6 +382,8 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = DengKiller;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "DengKiller 需要使用麦克风记录对话并在本机生成转写。";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "DengKiller 需要使用语音识别把对话转换为句子级文字。";
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -596,6 +622,8 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = DengKiller;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "DengKiller 需要使用麦克风记录对话并在本机生成转写。";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "DengKiller 需要使用语音识别把对话转换为句子级文字。";
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				LD_RUNPATH_SEARCH_PATHS = (

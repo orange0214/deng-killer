@@ -10,17 +10,21 @@ public final class ConversationViewModel: ObservableObject {
     @Published public var errorMessage: String?
 
     private let verificationClient: VerificationClient
+    private let transcriptionService: AudioTranscriptionService?
     private let store: ConversationStore
     private let scorer: ClaimScorer
     private let simulationDelayNanoseconds: UInt64
+    private var recordingTask: Task<Void, Never>?
 
     public init(
         verificationClient: VerificationClient,
+        transcriptionService: AudioTranscriptionService? = nil,
         store: ConversationStore = InMemoryConversationStore(),
         scorer: ClaimScorer = ClaimScorer(),
         simulationDelayNanoseconds: UInt64 = 250_000_000
     ) {
         self.verificationClient = verificationClient
+        self.transcriptionService = transcriptionService
         self.store = store
         self.scorer = scorer
         self.simulationDelayNanoseconds = simulationDelayNanoseconds
@@ -59,13 +63,65 @@ public final class ConversationViewModel: ObservableObject {
         partialTranscript = ""
     }
 
+    public func startRecording() {
+        guard !isRecording else { return }
+
+        guard let transcriptionService else {
+            startSimulation()
+            return
+        }
+
+        reset()
+        isRecording = true
+
+        let eventStream = transcriptionService.startTranscribing()
+        recordingTask = Task { [weak self] in
+            for await event in eventStream {
+                guard let self, !Task.isCancelled else { break }
+                await self.handle(event)
+            }
+
+            guard let self, !Task.isCancelled else { return }
+            self.isRecording = false
+            self.partialTranscript = ""
+        }
+    }
+
+    public func stopRecording() {
+        transcriptionService?.stopTranscribing()
+        recordingTask?.cancel()
+        recordingTask = nil
+        isRecording = false
+        partialTranscript = ""
+    }
+
     public func reset() {
+        transcriptionService?.stopTranscribing()
+        recordingTask?.cancel()
+        recordingTask = nil
         isRecording = false
         partialTranscript = ""
         sentences = []
         claims = []
         errorMessage = nil
         store.clear()
+    }
+
+    public func handle(_ event: TranscriptionEvent) async {
+        switch event {
+        case let .partial(text):
+            partialTranscript = text
+        case let .final(sentence):
+            await process(sentence)
+        case let .permissionDenied(message):
+            isRecording = false
+            partialTranscript = ""
+            errorMessage = message
+        case let .failed(message):
+            isRecording = false
+            partialTranscript = ""
+            errorMessage = message
+        }
     }
 
     public func process(_ sentence: TranscriptSentence) async {
