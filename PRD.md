@@ -1,4 +1,4 @@
-# 小中老三登 Killer PRD v0.1
+# Deng Killer PRD v0.1
 
 ## 1. 背景与目标
 
