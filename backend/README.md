@@ -2,8 +2,9 @@
 
 This folder contains the first backend scaffold for the planned verification
 service. The current implementation is intentionally small: it exposes the
-planned FastAPI API shape, uses a rule-based mock verifier, and keeps the
-privacy boundary testable before any real search or model integration is added.
+planned FastAPI API shape, uses a fixture-backed verification pipeline, and
+keeps the privacy boundary testable before any real search or model integration
+is added.
 
 The first backend version should follow `PRD.md`: a small Python + FastAPI
 service that verifies one checkworthy factual claim at a time. The service must
@@ -120,8 +121,9 @@ The implementation keeps modules small and testable:
 - API layer: FastAPI routes, request validation, response serialization, and
   HTTP error mapping in `app/api`.
 - Schemas: Pydantic models mirroring the Swift request and result contracts.
-- Verification service: A temporary rule-based verifier that mirrors the Swift
-  mock client for local API integration.
+- Verification pipeline: Claim decomposition, fixture-backed retrieval,
+  evidence judgement, and verdict generation stages that mirror the Swift mock
+  client for local API integration.
 - Privacy guard: Rejects payloads that attempt to send full audio, full
   transcripts, conversations, messages, or speaker history.
 
@@ -132,6 +134,7 @@ backend/
 ├── app/
 │   ├── main.py
 │   ├── api/
+│   ├── domain/
 │   ├── privacy/
 │   ├── schemas/
 │   └── services/
@@ -140,9 +143,9 @@ backend/
 └── tests/
 ```
 
-Future implementation should add claim decomposition, search/retrieval,
-evidence judgement, verdict generation, and privacy-safe logging as separate
-modules instead of expanding route handlers.
+Future implementation should replace fixture-backed retrieval and deterministic
+judgement with real search/RAG, LLM-assisted evidence judgement, and
+privacy-safe logging without expanding route handlers.
 
 ## Verification Flow
 
@@ -150,14 +153,17 @@ modules instead of expanding route handlers.
    context.
 2. Reject or ignore any payload shape that attempts to upload full audio, full
    transcript history, speaker history, or a full conversation.
-3. Use the temporary rule-based verifier for known MVP examples.
-4. Return uncertainty explicitly for unknown or underspecified claims.
-5. Return a low-interruption, evidence-preserving result.
-6. Return uncertainty explicitly for `uncertain`, `needs_context`, and
+3. Decompose complex claims into atomic claims when a rule exists.
+4. Retrieve fixture-backed evidence for known MVP examples.
+5. Judge evidence as supporting, contradicting, insufficient, or needing
+   context.
+6. Generate a low-interruption, evidence-preserving result.
+7. Return uncertainty explicitly for `uncertain`, `needs_context`, and
    `controversial` cases.
 
-Future versions should replace step 3 with decomposition, query generation,
-search/retrieval, evidence judgement, and verdict synthesis.
+Future versions should replace fixture retrieval with query generation,
+search/RAG retrieval, LLM-assisted evidence judgement, and richer source
+citations.
 
 ## Privacy Rules
 
@@ -201,5 +207,6 @@ When backend code is added later, tests should cover:
   decision advice.
 - Evidence summary preservation in every non-error verification response.
 
-Current tests cover health checks, the verification response contract, and
+Current tests cover health checks, the verification response contract, claim
+decomposition, fixture retrieval, evidence judgement, verdict generation, and
 privacy rejection for full-conversation payloads.

@@ -5,10 +5,10 @@ from pydantic import ValidationError
 
 from app.privacy.payload_guard import PrivacyPayloadError, validate_privacy_payload
 from app.schemas.verification import HealthResponse, VerificationRequest, VerificationResult
-from app.services.verifier import RuleBasedVerificationService
+from app.services.pipeline import VerificationPipeline
 
 router = APIRouter()
-verification_service = RuleBasedVerificationService()
+verification_service = VerificationPipeline()
 
 
 @router.get("/health", response_model=HealthResponse)
